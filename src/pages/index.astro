@@ -1,0 +1,179 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<!-- Terminal Hero -->
+			<section class="hero">
+				<div class="terminal-window">
+					<div class="terminal-bar">
+						<span class="dot red"></span>
+						<span class="dot yellow"></span>
+						<span class="dot green"></span>
+						<span class="terminal-title">ashleywolf — bash</span>
+					</div>
+					<div class="terminal-body">
+						<p class="line"><span class="prompt">$</span> whoami</p>
+						<p class="output">ashley wolf — developer, open source enthusiast, builder of things 🐺</p>
+						<p class="line"><span class="prompt">$</span> cat interests.txt</p>
+						<p class="output">open source · dev tools · agentic workflows · developer relations</p>
+						<p class="line"><span class="prompt">$</span> ls ~/blog<span class="cursor">▊</span></p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Recent Posts -->
+			<section class="posts-section">
+				<h2 class="section-title"><span class="prompt-char">&gt;</span> recent posts</h2>
+				<ul class="post-list">
+					{
+						posts.map((post) => (
+							<li class="post-card">
+								<a href={`/blog/${post.id}/`}>
+									<div class="post-meta">
+										<FormattedDate date={post.data.pubDate} />
+									</div>
+									<h3 class="post-title">{post.data.title}</h3>
+									<p class="post-desc">{post.data.description}</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Terminal Hero */
+	.hero {
+		margin-bottom: 3em;
+	}
+	.terminal-window {
+		background: var(--color-bg-card);
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+	.terminal-bar {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 10px 14px;
+		background: #1c2129;
+		border-bottom: 1px solid var(--color-border);
+	}
+	.dot {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+	}
+	.dot.red { background: #ff5f57; }
+	.dot.yellow { background: #febc2e; }
+	.dot.green { background: #28c840; }
+	.terminal-title {
+		margin-left: 8px;
+		font-family: var(--font-mono);
+		font-size: 0.75em;
+		color: var(--color-text-muted);
+	}
+	.terminal-body {
+		padding: 1.5em;
+		font-family: var(--font-mono);
+		font-size: 0.9em;
+		line-height: 1.8;
+	}
+	.terminal-body p {
+		margin: 0 0 0.25em 0;
+	}
+	.line .prompt {
+		color: var(--color-neon);
+		margin-right: 0.75em;
+	}
+	.line {
+		color: var(--color-text);
+	}
+	.output {
+		color: var(--color-text-muted);
+		padding-left: 1.5em;
+	}
+
+	/* Posts Section */
+	.section-title {
+		font-family: var(--font-mono);
+		font-size: 1.3em;
+		color: var(--color-text);
+		margin-bottom: 1.5em;
+	}
+	.prompt-char {
+		color: var(--color-neon);
+	}
+	.post-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+	.post-card {
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background: var(--color-bg-card);
+		transition: border-color 0.2s ease, background 0.2s ease;
+	}
+	.post-card:hover {
+		border-color: var(--color-neon);
+		background: var(--color-bg-hover);
+	}
+	.post-card a {
+		display: block;
+		padding: 1.25em 1.5em;
+		text-decoration: none;
+		color: inherit;
+	}
+	.post-meta {
+		font-family: var(--font-mono);
+		font-size: 0.8em;
+		color: var(--color-text-muted);
+		margin-bottom: 0.5em;
+	}
+	.post-title {
+		font-family: var(--font-mono);
+		font-size: 1.15em;
+		color: var(--color-text);
+		margin: 0 0 0.5em 0;
+	}
+	.post-card:hover .post-title {
+		color: var(--color-neon);
+	}
+	.post-desc {
+		font-size: 0.9em;
+		color: var(--color-text-muted);
+		margin: 0;
+		line-height: 1.5;
+	}
+	@media (max-width: 720px) {
+		.terminal-body {
+			font-size: 0.8em;
+		}
+	}
+</style>

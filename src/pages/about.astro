@@ -1,0 +1,138 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About | ${SITE_TITLE}`} description="About Ashley Wolf — developer, open source builder, and maker of dev tools." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="about">
+				<h1><span class="prompt">&gt;</span> cat about.md</h1>
+				<hr />
+
+				<div class="bio">
+					<p>
+						Hey, I'm <strong>Ashley Wolf</strong> 🐺 — a developer who builds open source tools
+						and cares deeply about developer experience.
+					</p>
+					<p>
+						I work in <strong>developer relations</strong> and spend most of my time thinking about
+						how to make developers' lives easier — whether that's building tools, writing about
+						workflows, or contributing to open source communities.
+					</p>
+					<p>
+						This blog is where I write about things I'm learning, building, and thinking about.
+						It's fully open source — you can
+						<a href="https://github.com/ashleywolf/ashleywolf.github.io">view the source on GitHub</a>.
+					</p>
+				</div>
+
+				<h2><span class="prompt">&gt;</span> ls ~/projects</h2>
+				<div class="projects">
+					<a href="https://github.com/ashleywolf/continuous-ai-resolver" class="project-card" target="_blank">
+						<div class="project-name">continuous-ai-resolver</div>
+						<div class="project-desc">Automatically resolve stale GitHub issues and PRs powered by AI</div>
+						<div class="project-meta">⭐ 8 · JavaScript</div>
+					</a>
+					<a href="https://github.com/ashleywolf/contributor-history" class="project-card" target="_blank">
+						<div class="project-name">contributor-history</div>
+						<div class="project-desc">The missing GitHub contributor growth chart — like star-history.com but for contributors</div>
+						<div class="project-meta">⭐ 2 · TypeScript</div>
+					</a>
+					<a href="https://github.com/ashleywolf/gh-aw-create" class="project-card" target="_blank">
+						<div class="project-name">gh-aw-create</div>
+						<div class="project-desc">Interactive terminal wizard for creating GitHub Agentic Workflows</div>
+						<div class="project-meta">⭐ 1 · Go</div>
+					</a>
+					<a href="https://github.com/ashleywolf/agentic-prompt-generator" class="project-card" target="_blank">
+						<div class="project-name">agentic-prompt-generator</div>
+						<div class="project-desc">Pattern library for GitHub Agentic Workflows — self-updating, backed by production data</div>
+						<div class="project-meta">⭐ 1 · JavaScript</div>
+					</a>
+				</div>
+
+				<h2><span class="prompt">&gt;</span> echo $LINKS</h2>
+				<div class="links">
+					<a href="https://github.com/ashleywolf" target="_blank">github.com/ashleywolf</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.about h1, .about h2 {
+		font-family: var(--font-mono);
+	}
+	.prompt {
+		color: var(--color-neon);
+	}
+	.bio {
+		margin: 1.5em 0 2.5em;
+		font-size: 1.05em;
+		line-height: 1.8;
+	}
+	.projects {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 1em;
+		margin: 1.5em 0 2.5em;
+	}
+	.project-card {
+		display: block;
+		padding: 1.25em;
+		background: var(--color-bg-card);
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		text-decoration: none;
+		color: inherit;
+		transition: border-color 0.2s ease, background 0.2s ease;
+	}
+	.project-card:hover {
+		border-color: var(--color-neon);
+		background: var(--color-bg-hover);
+		text-decoration: none;
+	}
+	.project-name {
+		font-family: var(--font-mono);
+		font-size: 1em;
+		color: var(--color-cyan);
+		margin-bottom: 0.5em;
+	}
+	.project-card:hover .project-name {
+		color: var(--color-neon);
+	}
+	.project-desc {
+		font-size: 0.85em;
+		color: var(--color-text-muted);
+		line-height: 1.5;
+		margin-bottom: 0.75em;
+	}
+	.project-meta {
+		font-family: var(--font-mono);
+		font-size: 0.75em;
+		color: var(--color-text-muted);
+		opacity: 0.7;
+	}
+	.links {
+		margin: 1em 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		font-family: var(--font-mono);
+		font-size: 0.95em;
+	}
+	@media (max-width: 720px) {
+		.projects {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
