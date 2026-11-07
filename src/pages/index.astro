@@ -38,6 +38,12 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 			</section>
 
+			<section class="newsletter-section" aria-labelledby="newsletter-title">
+				<h2 id="newsletter-title" class="section-title"><span class="prompt-char" aria-hidden="true">&gt;</span> Maintainer Tea</h2>
+				<p>Get Maintainer Tea by email.</p>
+				<a class="subscribe-link" href="https://maintainer-tea.beehiiv.com/subscribe">Subscribe to Maintainer Tea</a>
+			</section>
+
 			<!-- Recent Posts -->
 			<section class="posts-section">
 				<h2 class="section-title"><span class="prompt-char">&gt;</span> recent posts</h2>
@@ -63,6 +69,35 @@ const posts = (await getCollection('blog')).sort(
 </html>
 
 <style>
+	.newsletter-section {
+		margin-bottom: 3em;
+		padding: 1.5em;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background: var(--color-bg-card);
+	}
+	.newsletter-section .section-title {
+		margin-bottom: 0.75em;
+	}
+	.newsletter-section p {
+		color: var(--color-text-muted);
+		margin: 0 0 1em;
+	}
+	.subscribe-link {
+		display: inline-block;
+		padding: 0.75em 1em;
+		border: 1px solid var(--color-neon);
+		border-radius: 4px;
+		font-family: var(--font-mono);
+	}
+	.subscribe-link:hover {
+		background: var(--color-bg-hover);
+	}
+	.subscribe-link:focus-visible {
+		outline: 2px solid var(--color-cyan);
+		outline-offset: 4px;
+	}
+
 	/* Terminal Hero */
 	.hero {
 		margin-bottom: 3em;
